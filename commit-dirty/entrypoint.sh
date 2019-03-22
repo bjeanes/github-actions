@@ -3,10 +3,9 @@
 set -e
 
 if ! git diff --quiet ${WORKDIR}; then
-	: ${GIT_COMMITTER_NAME:=$GITHUB_ACTOR}
-	: ${GIT_COMMITTER_EMAIL:="$GITHUB_ACTOR@users.noreply.github.com"}
-	
-	env
+	git config user.name "${GIT_COMMITTER_NAME:-"$GITHUB_ACTOR"}"
+	git config user.email "${GIT_COMMITTER_EMAIL:-"$GITHUB_ACTOR@users.noreply.github.com"}"
+
 	git diff --stat ${WORKDIR}
 
 	git add -A ${WORKDIR}
