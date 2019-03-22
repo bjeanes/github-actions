@@ -8,13 +8,15 @@ WORKDIR=${WORKDIR:-"."}
 git add -N $WORKDIR
 
 if ! git diff --quiet $WORKDIR; then
-	git config user.name "${GIT_COMMITTER_NAME:-"$GITHUB_ACTOR"}"
-	git config user.email "${GIT_COMMITTER_EMAIL:-"$GITHUB_ACTOR@users.noreply.github.com"}"
-
+	: ${GIT_COMMITTER_NAME:="$GITHUB_ACTOR"}
+	: ${GIT_COMMITTER_EMAIL:="$GITHUB_ACTOR@users.noreply.github.com"}
+	
 	git diff --stat $WORKDIR
 
 	git add -A $WORKDIR
-	git commit -m "$*"
+	git commit \
+		--author "${GIT_COMMITTER_NAME} <${GIT_COMMITTER_EMAIL}>" \
+		-m "$*"
 else
 	echo Working tree $WORKDIR clean
 
