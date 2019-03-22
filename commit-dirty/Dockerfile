@@ -2,7 +2,7 @@ FROM alpine/git:1.0.7
 
 LABEL "name"="commit-dirty"
 LABEL "maintainer"="Bo Jeanes <me@bjeanes.com>"
-LABEL "version"="0.0.4"
+LABEL "version"="0.0.5"
 
 LABEL "com.github.actions.name"="Commit dirty changes"
 LABEL "com.github.actions.description"="Commits working tree if modified"
