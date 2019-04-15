@@ -10,7 +10,7 @@ fi
 if ! git diff --quiet ${GITHUB_SHA}... ; then
 	git push ${FORCE_PUSH:+"-f"} \
 		https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git \
-		HEAD:${PUSH_BRANCH:-"`echo "$GITHUB_REF" | awk -F / '{ print $3 }'`"}
+		HEAD:${PUSH_BRANCH:-"`echo "${GITHUB_REF:-master}" | awk -F / '{ print $3 }'`"}
 else
 	echo No commits created in workflow
 
